@@ -1,7 +1,7 @@
 'use strict'
 require('dotenv').config()
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRound = 10;
 var jwt = require('jsonwebtoken');
 

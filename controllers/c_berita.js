@@ -20,7 +20,7 @@ module.exports = {
 
   },
   readAll: function (req, res) {
-    Berita.find({}, null, function (err, response) {
+    Berita.find({}, null, { sort: { createdAt: -1 } }, function (err, response) {
       if (err) {
         return console.log('err ==>', err);
       }
@@ -90,7 +90,7 @@ module.exports = {
       Berita.findByIdAndUpdate({
         _id: req.params.id
       }, {
-        view: Number(response.view) + 1
+        view: response.view + 1
       }, function (err2, response2) {
         if (err2) {
           console.log(err2)
@@ -124,8 +124,9 @@ module.exports = {
       })
     })
   },
+
   beritaTerbaruById: function (req, res) {
-    Berita.find({}, null, function(err, response) {
+    Berita.find({}, null, { sort: { createdAt: -1 } }, function(err, response) {
       if (err) {
         return console.log(err)
       }
@@ -138,6 +139,18 @@ module.exports = {
       res.status(200).json({
         message: 'Berita terbaru berhasil didapatkan',
         data: beritaTerbaru
+      })
+    })
+  },
+
+  beritaTerpopuler: function (req, res) {
+    Berita.find({}).sort({view: -1}).limit(5).exec(function(err, response) {
+      if (err) {
+        return console.log(err)
+      }
+      res.status(200).json({
+        message: 'Berita terpopuler ditemukan',
+        data: response
       })
     })
   }

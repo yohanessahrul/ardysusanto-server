@@ -14,5 +14,6 @@ routerBerita.put('/updatebyid/:id', ControllerBerita.updateById);
 routerBerita.delete('/deletebyid/:id', ControllerBerita.deleteById);
 routerBerita.put('/ubahgambar/:id', images.multer.single('img'), images.sendUploadToGCS, ControllerBerita.changeImageById);
 routerBerita.get('/beritaterbaru/:id', ControllerBerita.beritaTerbaruById);
+routerBerita.get('/beritaterpopuler/:id', ControllerBerita.beritaTerpopuler);
 
 module.exports = routerBerita;
